@@ -1,0 +1,6 @@
+Table daily_steps {
+  date date [pk, not null]
+  step_count integer [not null]
+  distance_km float [not null]
+  duration_minutes integer [not null]
+}
