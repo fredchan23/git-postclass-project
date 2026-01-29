@@ -3,4 +3,12 @@ Table daily_steps {
   step_count integer [not null]
   distance_km float [not null]
   duration_minutes integer [not null]
+  week_start_date date [not null]
 }
+
+Table weekly_goals {
+  week_start_date date [pk, not null]
+  target_steps integer [not null]
+}
+
+Ref: daily_steps.week_start_date > weekly_goals.week_start_date
