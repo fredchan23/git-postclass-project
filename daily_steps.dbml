@@ -4,6 +4,9 @@ Table daily_steps {
   distance_km float [not null]
   duration_minutes integer [not null]
   week_start_date date [not null]
+  activity_type_id integer [not null]
+  
+  Note: "Tracks daily step metrics with activity classification"
 }
 
 Table weekly_goals {
@@ -11,4 +14,12 @@ Table weekly_goals {
   target_steps integer [not null]
 }
 
+Table activity_types {
+  id integer [pk, not null, increment]
+  activity_name string [not null, unique]
+  
+  Note: "Lookup table for activity types. Improves schema by: (1) Enforcing data integrity - prevents invalid/misspelled activities, (2) Reducing storage - string values stored once instead of repeatedly, (3) Enabling analytics - easier to aggregate metrics by activity type"
+}
+
 Ref: daily_steps.week_start_date > weekly_goals.week_start_date
+Ref: daily_steps.activity_type_id > activity_types.id
